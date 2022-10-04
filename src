@@ -1,0 +1,44 @@
+import random
+from ascii import logo
+from ascii import words
+from ascii import stages
+
+print(logo)
+print(" ")
+chosenword = random.choice(words)
+print(chosenword)
+
+blanks = []
+for i in chosenword :
+	blanks += "_"
+print(f"{' '.join(blanks)}\n")
+exit = False
+lives = 6
+
+while not exit :
+	guess = input("\nGuess an letter : ")
+	print(" ")
+
+	if guess in blanks :
+		print(f"You have already entered {guess}")
+	for i in range(len(chosenword)):
+		letter = chosenword[i]
+		if letter == guess:
+			blanks[i] = letter
+
+	if guess not in chosenword :
+		staged = stages[lives]
+		print(f"You have already guess  {guess}, that's not in the word.You loose a life\n")
+
+	print(f"{' '.join(blanks)}")
+
+	if "_" not in blanks :
+		exit = True
+		print(" ")
+		print("YOU WIN!")
+
+	elif lives == 0:
+		print(stages[0])
+		print("!YOU ARE HANGED!\n!YOU LOSE!")
+		exit = True
+		
